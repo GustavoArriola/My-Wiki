@@ -1,0 +1,52 @@
+## Implementación de IIS Web Deploy
+
+**Muchas** veces resulta importante, por productividad, realizar la implementación directamente desde Visual Studio. Para implementar la característica Web Deploy se deben seguir los siguientes pasos.
+
+**Importante: Este tutorial asume que el servidor posee una instalación limpia.**
+              Algunas características de este tutorial no son necesarias, selecciona las opciones apropiadas para tu entorno.
+
+## **En el servidor**
+1. Abrir el Administrador del Servidor.
+2. En la ficha **Panel**, dentro del grupo **Inicio rápido**, Clic en **Agregar roles y características.**
+3. Siguiente, Siguiente, Siguiente.
+4. En el apartado Roles de servidor, seleccionar:
+4.1. Servidor Web (IIS)
+  4.1.1. Características HTTP comunes (las necesarias).
+  4.1.2. Estado de diagnóstico: (las necesarias).
+  4.1.3. Rendimiento (las necesarias).
+  4.1.4. Seguridad (las necesarias).
+  4.1.5. Desarrollo de aplicaciones (las necesarias).
+4.2. Herramientas de administración
+  4.2.1. Consola de administración de IIS.
+  4.2.2. Scripts y herramientas de administración (si es necesario).
+  4.2.3. Servicio de administración **(MUY IMPORTANTE, ya que este componente instala el Servicio de administración Web)**.
+ 5. Siguiente.
+  5.1 En características, seleccionar las necesarias.
+6. Siguiente
+7. Confirmar.
+8. Finalizar el asistente.
+9. Buscar en la Web el instalador de Web Deploy, actualmente en: [https://www.microsoft.com/en-us/download/details.aspx?id=106070](https://www.microsoft.com/en-us/download/details.aspx?id=106070)
+10. Web Deploy instala, entre otras cosas, el Servicio de Agente de implementación Web.
+11. Descargar la versión que corresponda al sistema operativo del servidor (x86 o x64 y el idioma correspondiente).
+12. Instalar Web Deploy, asegurarse de instalar **Completo**.
+13. Ejecutar **services.msc** y asegurarse que los siguientes servicios estén iniciados (configurar para que se inicien automáticamente si es necesario).
+  13.1. **Servicio Agente de implementación web.**
+  13.2. **Servicio de administración de web.**
+
+
+## **En Visual Studio**
+1. En la aplicación apropiada, crear un nuevo perfil de publicación (Clic derecho, publicar)
+2. Clic en **Nuevo perfil**.
+3. Seleccionar Servidor Web (IIS), clic en siguiente.
+4. Seleccionar Web Deploy, clic en siguiente.
+5. Establecer la siguiente configuración.
+  5.1. Servidor: Por ejemplo: **192.168.0.110**
+  5.2. Nombre del sitio: Por ejemplo: **Default Web Site\Service.API**
+  5.3. Dirección URL Destino: Por ejemplo: **http://192.168.0.110/Service.API**
+  5.4. Nombre de usuario: Por ejemplo: **ServerName\gustavo.arriola**
+  5.5 Contraseña: Por ejemplo: ******** (Clic en guardar contraseña si es necesario)
+  5.6 Validar la conexión.
+6. Finalizar y cerrar el asistente.
+7. Clic en el botón **Publicar** para enviarlo a IIS en el servidor destino seleccionado.
+8. Fin.
+
